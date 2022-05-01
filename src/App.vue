@@ -1,5 +1,7 @@
 <template>
-  <div class="app"></div>
+  <div class="app">
+    <h1>欢迎来到天道宫</h1>
+  </div>
 </template>
 
 <script>
