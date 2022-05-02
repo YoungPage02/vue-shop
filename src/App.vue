@@ -1,6 +1,7 @@
 <template>
-  <div class="app">
-    <h1>欢迎来到天道宫</h1>
+  <div id="app">
+    <!-- <h1>欢迎来到天道宫</h1> -->
+    <router-view></router-view>
   </div>
 </template>
 
