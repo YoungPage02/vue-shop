@@ -57,7 +57,7 @@ export default {
         // console.log(valid)
         if (valid) {
           const { data: res } = await this.$http.post('/login', this.loginForm)
-          console.log(res)
+          // console.log(res)
           if (res.meta.status === 200) {
             // console.log('登陆成功')
             this.$message({
