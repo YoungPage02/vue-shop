@@ -59,8 +59,8 @@
                 <el-tooltip class="item" effect="dark" content="删除" placement="top" :enterable="false">
                   <el-button type="danger" icon="el-icon-delete" circle @click="removeUserById(scope.row.id)"></el-button>
                 </el-tooltip>
-                <el-tooltip class="item" effect="dark" content="设置" placement="top" :enterable="false">
-                  <el-button type="warning" icon="el-icon-setting" circle></el-button>
+                <el-tooltip class="item" effect="dark" content="分配角色" placement="top" :enterable="false">
+                  <el-button type="warning" icon="el-icon-setting" circle @click="getAllotDialog(scope.row)"></el-button>
                 </el-tooltip>
               </template>
           </el-table-column>
@@ -87,6 +87,32 @@
             <el-button type="primary" @click="modifyUsersInfo">确 定</el-button>
           </span>
         </el-dialog>
+        <!-- 分配角色dialog -->
+        <el-dialog
+          title="分配角色信息"
+          :visible.sync="allotDialogVisible"
+          width="50%" @close="allotDialogReset">
+          <div>
+            <p>姓名：<span> {{ userInfo.username }} </span></p>
+            <p>角色: <span> {{ userInfo.role_name }} </span></p>
+            <p>新分配的角色：
+              <template>
+                <el-select v-model="selectRoleId" placeholder="请选择">
+                  <el-option
+                    v-for="item in rolesList"
+                    :key="item.id"
+                    :label="item.roleName"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </template>
+            </p>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="allotDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="allotRoles">确 定</el-button>
+          </span>
+        </el-dialog>
 
         <!-- 分页区域 -->
         <el-pagination
@@ -102,8 +128,7 @@
         <!-- 添加用户的提示框 -->
         <el-dialog
           title="提示"
-          :visible.sync="addDialogVisible"
-          width="50%" @close="addReset">
+          :visible.sync="addDialogVisible" width="50%" @close="addReset">
           <!-- 主体内容区域 -->
           <el-form :model="addForm" :rules="addFormRuls" ref="addFormRef" label-width="70px" class="demo-addForm">
             <el-form-item label="姓名" prop="username">
@@ -161,6 +186,8 @@ export default {
       addDialogVisible: false,
       // 修改用户信息所需布尔值
       modifyDialogVisible: false,
+      // 分配角色dialog所需布尔值
+      allotDialogVisible: false,
       // 添加用户双向绑定的数据
       addForm: {
         username: '',
@@ -168,6 +195,11 @@ export default {
         email: '',
         mobile: ''
       },
+      // 分配角色的信息
+      userInfo: {},
+      // 角色列表信息
+      rolesList: [],
+      selectRoleId: '',
       // 添加表单验证规则
       addFormRuls: {
         username: [
@@ -309,6 +341,31 @@ export default {
       if (res.meta.status !== 200) return this.$message.error('删除用户失败')
       this.$message.success('删除信息成功')
       this.getUsersInfo()
+    },
+    // 打开分配角色dialog
+    async getAllotDialog (userInfo) {
+      // console.log(userInfo)
+      this.userInfo = userInfo
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) return this.$message.error('获取角色列表失败')
+      // console.log(res)
+      this.rolesList = res.data
+      this.allotDialogVisible = true
+    },
+    // 点击确定按钮，分配角色
+    async allotRoles () {
+      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, {
+        rid: this.selectRoleId
+      })
+      if (res.meta.status !== 200) {
+        return this.$message.error('分配角色失败')
+      }
+      this.getUsersInfo()
+      this.allotDialogVisible = false
+    },
+    // 重置分配dialog
+    allotDialogReset () {
+      this.selectRoleId = ''
     }
   },
   created () {
