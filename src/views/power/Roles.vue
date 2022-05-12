@@ -243,7 +243,7 @@ export default {
       this.$message.success('删除权限成功')
       role.children = res.data
     },
-    // 展示分配权限diaog表单
+    // 展示分配权限dialog表单
     async showSetRightDialog (role) {
       const { data: res } = await this.$http.get('rights/tree')
       if (res.meta.status !== 200) return this.$message.error('获取权限列表失败')
