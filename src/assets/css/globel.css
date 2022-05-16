@@ -13,3 +13,13 @@ html,#app,body {
   display: flex;
   align-items: center;
 }
+
+.el-steps {
+  margin: 15px;
+}
+.el-step__title {
+  font-size: 14px;
+}
+.ql-editor {
+  min-height: 300px;
+}
