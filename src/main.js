@@ -21,7 +21,7 @@ axios.interceptors.request.use(config => {
   return config
 })
 Vue.prototype.$http = axios
-
+// 添加关于日期的全局样式
 Vue.filter('dateFormat', function (originVal) {
   const dt = new Date(originVal)
   const y = dt.getFullYear()
