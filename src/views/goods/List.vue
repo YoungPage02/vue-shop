@@ -82,7 +82,7 @@ export default {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) return this.$message.error('得到商品列表数据失败')
-      console.log(res)
+      // console.log(res)
       this.goodsList = res.data.goods
       this.total = res.data.total
     },
