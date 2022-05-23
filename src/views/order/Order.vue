@@ -207,7 +207,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('得到订单数据列表数据失败')
       }
-      console.log(res, '订单数据列表数据')
+      // console.log(res, '订单数据列表数据')
       this.orderList = res.data.goods
       this.total = res.data.total
     },
@@ -228,7 +228,7 @@ export default {
     },
     showProcess () {
       this.processDialogVisible = true
-      console.log(this.processInfo, '物流信息')
+      // console.log(this.processInfo, '物流信息')
     }
     /* // 打开查看物流信息dialog,,,,,,,API接口有问题
     async showProcess () {
