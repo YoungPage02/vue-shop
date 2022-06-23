@@ -2,9 +2,9 @@
   <div class="login_container">
     <div class="login_box">
       <!-- 标题logo -->
-      <div class="avatar_box">
+      <!-- <div class="avatar_box">
         <img src="../assets/logo.png" alt="">
-      </div>
+      </div> -->
       <!-- 表单区域-->
       <el-form class="login_form" ref="loginFormRef" :model="loginForm" :rules="loginFormRules">
         <!-- 用户 -->
@@ -20,7 +20,6 @@
           <el-button type="primary" @click="login">登录</el-button>
           <el-button type="info" @click="resetLogin">重置</el-button>
         </el-form-item >
-
       </el-form>
     </div>
   </div>
@@ -79,19 +78,34 @@ export default {
 
 <style lang="less" scoped>
   .login_container {
-    background-color: #2b4b6b;
+    background: url(@/assets/img/90724581_p0_master1200.jpg) no-repeat;
+    background-size: cover;
     height: 100%;
+    .login_form {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 20px;
+      .btns {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0;
+      }
+    }
   }
   .login_box {
     height: 300px;
     width: 450px;
-    background-color: #fff;
+    background-color: white;
+    opacity: .9;
     border-radius: 5px;
     position: absolute;
-    left: 50%;
+    left: 30%;
     top: 50%;
     transform: translate(-50%,-50%);
-    .avatar_box {
+    /* .avatar_box {
       width: 130px;
       height: 130px;
       border: 1px solid #ddd;
@@ -109,17 +123,6 @@ export default {
         border-radius: 50%;
         // background-color: #eee;
       }
-    }
-  }
-  .btns {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .login_form {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 20px;
+    } */
   }
 </style>

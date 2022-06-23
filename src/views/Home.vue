@@ -4,7 +4,7 @@
       <el-header>
         <div>
           <img src="@/assets/Elaina.png" alt="">
-          <span>欢 迎 来 到 天 道 宫</span>
+          <span>商 品 后 台 管 理 系 统</span>
         </div>
         <el-button type="info" @click="loginOut">退出登录</el-button>
       </el-header>
