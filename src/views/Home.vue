@@ -2,11 +2,18 @@
     <el-container class="home_container">
       <!-- header栏 -->
       <el-header>
-        <div>
-          <img src="@/assets/Elaina.png" alt="">
-          <span>商 品 后 台 管 理 系 统</span>
+        <div class="left">
+          <img src="@/assets/大V认证.png" alt="">
+          <span>iStudy</span>
         </div>
-        <el-button type="info" @click="loginOut">退出登录</el-button>
+        <!-- <el-button type="info" @click="loginOut">退出登录</el-button> -->
+        <div class="right">
+          <img class="ic" src="@/assets/3.1铃铛.png" alt="">
+          <img class="head" src="@/assets/99435249_p0_master1200.jpg" alt="" @click="isLogoutChange">
+          <div :class="isLogout? 'logout' : 'active' ">
+            <div class="item" @click="loginOut">退出登录</div>
+          </div>
+        </div>
       </el-header>
       <!-- 主体部分 -->
       <el-container>
@@ -17,8 +24,7 @@
           <!-- 侧边栏菜单部分 -->
           <el-menu
             class="el-menu-vertical-demo"
-            background-color="#515568"
-            text-color="#fff" :default-active="navState"
+            text-color="#000" :default-active="navState"
             active-text-color="#409EFF" unique-opened :collapse="collapseStatus" :collapse-transition="false" :router="true">
             <!-- 一级菜单 -->
             <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
@@ -57,10 +63,15 @@ export default {
         145: 'el-icon-s-marketing'
       },
       collapseStatus: false,
-      navState: ''
+      navState: '',
+      isLogout: false
     }
   },
   methods: {
+    // 显示退出按钮
+    isLogoutChange () {
+      this.isLogout = !this.isLogout
+    },
     // 退出登录
     loginOut () {
       window.sessionStorage.clear()
@@ -94,26 +105,61 @@ export default {
   }
   // 头部样式
   .el-header {
-    background-color: #556165;
+    position: relative;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 0;
-    div {
+    padding-left: 5px;
+    padding-right: 71px;
+    .left {
+      cursor: pointer;
       display: flex;
       align-items: center;
-      font-size: 20px;
-      color: #fff;
+      font-size: 24px;
+      font-weight: 900;
+      color: black;
       img {
-        height: 60px;
-        margin-right: 20px;
+        height: 47px;
+        margin-right: 2px;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      .ic {
+        height: 24px;
+        margin-right: 15px;
+      }
+      .head {
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+      .logout {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        width: 100px;
+        background-color: white;
+        right: 29px;
+        bottom: -52px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 1px 1px 1px;
+        padding: 12px;
+        z-index: 2;
+      }
+      .active {
+        display: none;
       }
     }
   }
   // 侧边栏样式
   .el-aside {
     transition: 0.5s;
-    background-color: #515568;
+    background-color: #fff;
     >div {
       height: 24px;
       padding: 5px;
@@ -127,6 +173,7 @@ export default {
     }
   }
   .el-main {
-    background-color: rgb(234,237,241);
+    background-color: #0c192c;
+    overflow: hidden;
   }
 </style>

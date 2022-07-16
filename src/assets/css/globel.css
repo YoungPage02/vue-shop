@@ -23,3 +23,6 @@ html,#app,body {
 .ql-editor {
   min-height: 300px;
 }
+.el-card {
+  z-index: -1;
+}

@@ -78,9 +78,21 @@ export default {
 
 <style lang="less" scoped>
   .login_container {
-    background: url(@/assets/img/90724581_p0_master1200.jpg) no-repeat;
-    background-size: cover;
-    height: 100%;
+    height: 100vh;
+    background: linear-gradient(125deg,#74b9ff,#fab1a0,#55efc4,#9c88ff,#e84393,#0097e6,#f3a683,#63cdda,#f7d794);
+    background-size: 900%;
+    animation: bgAnimation 24s linear infinite;
+    @keyframes bgAnimation {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
     .login_form {
       position: absolute;
       top: 50%;
@@ -98,11 +110,10 @@ export default {
   .login_box {
     height: 300px;
     width: 450px;
-    background-color: white;
-    opacity: .9;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px;
     position: absolute;
-    left: 30%;
+    left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
     /* .avatar_box {
